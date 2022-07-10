@@ -124,12 +124,85 @@ function HomeScreen() {
           </Pressable>
         </View>
       </View>
+      
+      {/* 두번째 페이지 */}
+      <View testID="Hello" style={styles.slide2}>
 
-      <View testID="Beautiful" style={styles.slide2}>
-        <Text style={styles.text}>Just do it.</Text>
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+
+            <View style={styles.modalLike}>
+              <Text style={styles.modalText}>공유 </Text>
+              <Text style={styles.modalText}>복사 </Text>
+              <Text style={styles.modalText}>좋아요 </Text>
+            </View>
+
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+              <Text style={styles.textStyle}>닫기</Text>
+              </Pressable>
+          </View>
+        </View>
+      </Modal>
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.text}>Just do it.</Text>
+        </Pressable>
       </View>
-      <View testID="Simple" style={styles.slide3}>
-        <Text style={styles.text}>나나나나나</Text>
+      </View>
+
+      {/* 3번째 페이지 */}
+      <View testID="Hello" style={styles.slide3}>
+
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+
+            <View style={styles.modalLike}>
+              <Text style={styles.modalText}>공유 </Text>
+              <Text style={styles.modalText}>복사 </Text>
+              <Text style={styles.modalText}>좋아요 </Text>
+            </View>
+
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+              <Text style={styles.textStyle}>닫기</Text>
+              </Pressable>
+          </View>
+        </View>
+      </Modal>
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.text}>늦었을때가 제일 늦었다.</Text>
+        </Pressable>
+      </View>
       </View>
     </Swiper>
   );
