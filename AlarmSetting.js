@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
-import AlarmSetting from "./AlarmSetting";
-function Alarm() {
+
+function AlarmSetting() {
   return (
     <View>
-      <Text>???</Text>
+      <Text>dfasf</Text>
     </View>
   );
 }
 
-export default Alarm;
+export default AlarmSetting;

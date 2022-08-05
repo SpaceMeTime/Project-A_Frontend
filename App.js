@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Pressable, Text, View, TouchableOpacity, StatusBar,TextInput, ScrollView, AsyncStorage} from 'react-native';
+import { Alert, Modal, StyleSheet, Pressable, Text, View, TouchableOpacity, StatusBar,TextInput, ScrollView, Button} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-
+//화면전환 import
 import { createStackNavigator } from '@react-navigation/stack';
 
 // swiper import
@@ -13,7 +12,7 @@ import CheckBox from '@react-native-community/checkbox';
 import { theme } from "./color";
 
 import Alarm  from "./alarm";
-
+import AlarmSetting from "./AlarmSetting";
 
 // 홈화면
 function HomeScreen() {
@@ -332,7 +331,7 @@ const Tab = createBottomTabNavigator();
 // 화면전환 선언
 const Stack = createStackNavigator();
 
-function MyTabs() {
+function Home() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="홈" component={HomeScreen} />
@@ -342,27 +341,34 @@ function MyTabs() {
   );
 }
 
-
-function MyStack() {
-  return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="alarm"
-          component={Alarm}
-        />
-      </Stack.Navigator>
-
-
-  );
-};
-
-
 export default function App() {
   return (
     <NavigationContainer>
-      <MyTabs />
+      <Stack.Navigator>
+        <Stack.Screen
+          name="back"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Alarm"
+          component={Alarm}
+          options={({navigation}) => ({
+            headerRight: () => (
+              <Button
+                onPress={() => navigation.navigate("AlarmSetting")}
+                color="red"
+                title="➕"
+              />
+            )    
+          })}
+        />
+        <Stack.Screen
+          name="AlarmSetting"
+          component={AlarmSetting}
+        />
+      </Stack.Navigator>
       
-      <MyStack />
     </NavigationContainer>
   );
 }
