@@ -44,5 +44,36 @@ public class MainActivity extends ReactActivity {
       // More on this on https://reactjs.org/blog/2022/03/29/react-v18.html
       return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     }
-  }
+    @Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+
+  ComponentName receiver = new ComponentName(this, BootReceiver.class);
+  PackageManager packageManager = this.getPackageManager();
+
+  packageManager.setComponentEnabledSetting(receiver,
+          PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+          PackageManager.DONT_KILL_APP);
+}
+
+@Override
+protected ReactActivityDelegate createReactActivityDelegate() {
+  return new ReactActivityDelegate(this, getMainComponentName()){
+    @Nullable
+    @Override
+    protected Bundle getLaunchOptions() {
+      Intent intent = getIntent();
+      Bundle bundle = intent.getExtras();
+
+      if(intent.getBooleanExtra("notiRemovable", true))
+        AlarmModule.stop(this.getContext());
+
+      return bundle;
+    }
+  };
+}
+
+@Override
+protected List<ReactPackage> getPackages() {
+  return Arrays.<ReactPackage>asList(new MainReactPackage(), new WheelPickerPackage());
 }
